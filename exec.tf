@@ -5,16 +5,13 @@ data "template_file" "inventory" {
     EOT
 }
 
-resource "null_resource" "move_inventory" {
-  triggers = {
-    inventory_rendered = data.template_file.inventory.rendered
-  }
+resource "local_file" "dynamic_inventory" {
+  depends_on = [aws_instance.public_instance]
+
+  filename = "dynamic_inventory.ini"
+  content  = data.template_file.inventory.rendered
 
   provisioner "local-exec" {
-    command = <<-EOT
-      mkdir -p ~/2conf
-      echo "${data.template_file.inventory.rendered}" > ~/2conf/dynamic_inventory.ini
-      chmod 400 ~/2conf/dynamic_inventory.ini
-    EOT
+    command = "chmod 400 ${local_file.dynamic_inventory.filename}"
   }
 }
