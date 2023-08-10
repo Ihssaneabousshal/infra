@@ -47,6 +47,11 @@ pipeline {
                 }
             }
         }
+        stage("Ansible"){
+            steps{
+                sh 'ansible-playbook -i dynamic_inventory.ini configapp.yml'
+            }
+        }
 
     }
 }
