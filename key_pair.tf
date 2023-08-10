@@ -6,16 +6,16 @@ resource "tls_private_key" "rsa_4096" {
 
 // Create Key Pair for Connecting EC2 via SSH
 resource "aws_key_pair" "key_pair" {
-  key_name   = "Akey"
+  key_name   = "Mkey"
   public_key = tls_private_key.rsa_4096.public_key_openssh
 }
 
 // Save PEM file locally
 resource "local_file" "private_key" {
   content  = tls_private_key.rsa_4096.private_key_pem
-  filename = "Akey"
+  filename = "Mkey"
 
   provisioner "local-exec" {
-    command = "chmod 400 Akey"
+    command = "chmod 400 Mkey"
   }
 }
