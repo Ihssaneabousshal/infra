@@ -15,7 +15,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/Ihssaneabousshal/meeeh.git'
+                git branch: 'main', credentialsId: 'PAT_Jenkins', url: 'https://github.com/Ihssaneabousshal/meeeh.git'
             }
         }
         stage('Terraform init') {
