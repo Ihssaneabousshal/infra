@@ -49,7 +49,7 @@ pipeline {
         }
         stage("Ansible"){
             steps{
-                ansiblePlaybook(inventory: 'dynamic_inventory.ini', playbook: 'configapp.yml')
+                ansiblePlaybook(inventory: '~/2conf/dynamic_inventory.ini', playbook: 'configapp.yml')
             }
         }
 
