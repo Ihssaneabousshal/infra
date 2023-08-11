@@ -52,6 +52,17 @@ pipeline {
                 ansiblePlaybook(inventory: 'dynamic_inventory.ini', playbook: 'configapp.yml')
             }
         }
+        stage('Store File as Credential and Delete') {
+            steps {
+                script {
+                    def fileContent = readFile 'Mkey'
+                    withCredentials([string(credentialsId: 'ASECRETKEY', variable: 'FILE_CONTENT')]) {
+                        FILE_CONTENT = fileContent
+                    }
+                    sh 'rm Mkey' // Delete the original file
+                }
+            }
+        }
 
     }
 }
