@@ -50,7 +50,7 @@ pipeline {
 
         stage("Ansible"){
             steps{
-                ansiblePlaybook credentialsId: 'Ansible', disableHostKeyChecking: true, installation: 'Ansible', inventory: 'dynamic_inventory.ini', playbook: 'configapp.yml'
+                ansiblePlaybook credentialsId: 'ec2', installation: 'Ansible', inventory: 'dynamic_inventory.ini', playbook: 'configapp.yml'
             }
         }
         
