@@ -1,7 +1,7 @@
 data "template_file" "inventory" {
   template = <<-EOT
     [ec2_instances]
-    ${aws_instance.public_instance.public_ip} ansible_user=ubuntu
+    ${aws_instance.public_instance.public_ip}
     EOT
 }
 
