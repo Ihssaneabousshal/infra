@@ -47,11 +47,6 @@ pipeline {
                 }
             }
         }
-        stage("Ansible"){
-            steps{
-                ansiblePlaybook(inventory: 'dynamic_inventory.ini', playbook: 'configapp.yml')
-            }
-        }
         stage('Store File as Credential and Delete') {
             steps {
                 script {
@@ -63,6 +58,12 @@ pipeline {
                 }
             }
         }
+        stage("Ansible"){
+            steps{
+                ansiblePlaybook(credentialsId: 'ASECRETKEY', inventory: 'dynamic_inventory.ini', playbook: 'configapp.yml')
+            }
+        }
+        
 
     }
 }
