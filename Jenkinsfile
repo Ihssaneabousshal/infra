@@ -30,18 +30,17 @@ pipeline {
         stage('Terraform apply') {
             steps {
                 script {
-                        if (params.autoApprove) {
-                            sh 'terraform apply --auto-approve'
-                        }
+                    if (params.autoApprove) {
+                        sh 'terraform apply --auto-approve'
+                    }
                 }
             }
+        } 
 
-        stage("Ansible"){
-            steps{
+        stage("Ansible") {
+            steps {
                 ansiblePlaybook credentialsId: 'ec2', inventory: 'dynamic_inventory.ini', playbook: 'configapp.yml'
             }
         }
-        
-
     }
 }
