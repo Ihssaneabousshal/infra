@@ -1,7 +1,7 @@
 data "template_file" "inventory" {
   template = <<-EOT
     [ec2_instances]
-    ${aws_instance.public_instance.public_ip}
+    ${aws_instance.apiapp.public_ip}
     EOT
 }
 
